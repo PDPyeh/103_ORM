@@ -14,6 +14,7 @@ const test = {
   password: process.env.DB_PASSWORD || null,
   database: process.env.DB_NAME || 'database_development',
   host: process.env.DB_HOST ,
+  port: process.env.DB_PORT,
   dialect: process.env.DB_DIALECT,
 };
 
@@ -22,6 +23,7 @@ const production = {
   password: process.env.DB_PASSWORD || null,
   database: process.env.DB_NAME || 'database_development',
   host: process.env.DB_HOST ,
+  port: process.env.DB_PORT,
   dialect: process.env.DB_DIALECT,
 };
 

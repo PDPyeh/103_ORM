@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
   }, {
-    tableName: 'komiks',
+    tableName: 'Komik',
     freezeTableName: true,
     timestamps: true
   });
