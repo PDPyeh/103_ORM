@@ -15,3 +15,21 @@ db.sequelize.sync().then(() => {
 }).catch((err) => {
   console.error('Error synchronizing database:', err);
 });
+
+app.post('/komik', async (req, res) => {
+    const data = req.body;
+    try {
+        const komik = await db.Komik.create(data);
+        res.status(komik);
+    } catch (error) {}
+        res.send({message: error.message});
+});
+
+app.get('/komik', async (req, res) => {
+    try {
+        const komiks = await db.Komik.findAll();
+        res.status(200).json(komiks);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to retrieve komiks' });
+    }
+});
