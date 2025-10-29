@@ -17,12 +17,12 @@ db.sequelize.sync().then(() => {
 });
 
 app.post('/komik', async (req, res) => {
-    const data = req.body;
-    try {
-        const komik = await db.Komik.create(data);
-        res.status(komik);
-    } catch (error) {}
-        res.send({message: error.message});
+  try {
+    const komik = await db.Komik.create(req.body);
+    res.status(201).json(komik);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 app.get('/komik', async (req, res) => {
