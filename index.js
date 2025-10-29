@@ -28,8 +28,37 @@ app.post('/komik', async (req, res) => {
 app.get('/komik', async (req, res) => {
     try {
         const komiks = await db.Komik.findAll();
-        res.status(200).json(komiks);
+        res.send(komiks);
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve komiks' });
+    }
+});
+
+app.put('/komik/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    try {
+        const komik = await db.Komik.findByPk(id);
+        if (!komik) {
+            return res.status(404).json({ error: 'Komik not found' });
+        }
+        await komik.update(data);
+        res.send({message: 'Komik updated successfully'});
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update komik' });
+    }
+});
+
+app.delete('/komik/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const komik = await db.Komik.findByPk(id);
+        if (!komik) {
+            return res.status(404).json({ error: 'Komik not found' });
+        }
+        await komik.destroy();
+        res.send({ message: 'Komik deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete komik' });
     }
 });
